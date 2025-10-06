@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5002';
 
 // Fix CORS issues by ensuring proper origin
-if (window.location.port === '5001') {
-  window.location.href = 'http://localhost:3000';
+if (window.location.port === '5001' || window.location.port === '5002') {
+  window.location.href = 'http://localhost:3001';
 }
 
 // Create axios instance with default config

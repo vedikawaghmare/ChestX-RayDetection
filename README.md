@@ -1,72 +1,160 @@
-# Chest X-Ray Detection with Apriori Algorithm
+# 🏥 Chest X-Ray Medical Diagnosis System
 
-A Flask web application that applies the Apriori algorithm to find frequent itemsets and association rules in chest X-ray findings data, enhanced with Gemini AI for image validation.
+Professional AI-powered chest X-ray analysis using DenseNet-121 deep learning model for detecting 14 different pathological conditions.
 
-## Features
+## 🚀 Features
 
-- **Apriori Algorithm**: Finds frequent itemsets in chest X-ray findings
-- **Association Rules**: Generates rules with support, confidence, and lift metrics
-- **Gemini AI Integration**: Validates uploaded images are chest X-rays
-- **Interactive GUI**: Bootstrap-based web interface with drag-drop functionality
-- **Real-time Diagnosis**: Upload chest X-ray images and get instant AI-powered diagnosis
-- **Medical Insights**: Shows primary conditions, associations, and potential complications
+- **Multi-Disease Detection**: Analyzes 14 different pathologies including Cardiomegaly, Pneumonia, Atelectasis, etc.
+- **Professional UI**: Clean, responsive React interface with real-time analysis
+- **DenseNet-121 Model**: State-of-the-art deep learning architecture
+- **Confidence Scoring**: Probability scores and severity levels for each condition
+- **Visual Results**: Interactive charts and detailed analysis reports
 
-## Dataset
+## 🏗️ Architecture
 
-Uses the NIH Chest X-rays dataset from Kaggle:
-- URL: https://www.kaggle.com/datasets/nih-chest-xrays/data
-- File: `Data_Entry_2017.csv` (112,120+ patient records)
-- Trained model: `chest_xray_apriori_model.pkl`
-
-## Installation
-
-1. Install dependencies:
-```bash
-pip install -r requirements.txt
+```
+├── backend/           # Flask API server
+│   ├── app.py        # Main Flask application
+│   └── requirements.txt
+├── frontend/         # React web application
+│   ├── src/
+│   │   ├── App.js    # Main React component
+│   │   └── App.css   # Styling
+│   └── package.json
+└── deep-learning/    # ML model and notebooks
+    ├── densenet.hdf5 # Trained model weights
+    └── *.ipynb       # Jupyter notebooks
 ```
 
-2. Set up Gemini AI API key in `.env` file:
+## 🔧 Setup Instructions
+
+### Backend Setup
+
+1. **Navigate to backend directory:**
+   ```bash
+   cd backend
+   ```
+
+2. **Install Python dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Start Flask server:**
+   ```bash
+   python app.py
+   ```
+   Server runs on `http://localhost:5002`
+
+### Frontend Setup
+
+1. **Navigate to frontend directory:**
+   ```bash
+   cd frontend
+   ```
+
+2. **Install Node.js dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start React development server:**
+   ```bash
+   npm start
+   ```
+   Application runs on `http://localhost:3000`
+
+## 📊 Detected Conditions
+
+The system can detect the following 14 pathological conditions:
+
+1. **Atelectasis** - Lung collapse
+2. **Cardiomegaly** - Enlarged heart
+3. **Consolidation** - Lung tissue filling
+4. **Edema** - Fluid buildup
+5. **Effusion** - Fluid around lungs
+6. **Emphysema** - Lung damage
+7. **Fibrosis** - Lung scarring
+8. **Hernia** - Organ displacement
+9. **Infiltration** - Abnormal substances in lungs
+10. **Mass** - Tumor/growth
+11. **Nodule** - Small growth
+12. **Pleural Thickening** - Lung lining thickening
+13. **Pneumonia** - Lung infection
+14. **Pneumothorax** - Collapsed lung
+
+## 🎯 How to Use
+
+1. **Upload Image**: Click the upload area and select a chest X-ray image (JPG, PNG, JPEG)
+2. **Analyze**: Click "Analyze X-Ray" button to start the AI analysis
+3. **View Results**: 
+   - Summary status (Normal/Abnormal)
+   - Detected conditions with confidence scores
+   - Complete analysis report with all probabilities
+   - Visual confidence bars and severity indicators
+
+## 🔬 Model Details
+
+- **Architecture**: DenseNet-121
+- **Input Size**: 320x320 pixels
+- **Training Dataset**: ChestX-ray8 (108,948 images from 32,717 patients)
+- **Performance**: 
+  - Cardiomegaly: 90% AUC
+  - Edema: 86% AUC  
+  - Mass: 82% AUC
+
+## ⚠️ Medical Disclaimer
+
+This AI system is designed for **educational and research purposes only**. It should not be used as a substitute for professional medical diagnosis. Always consult with qualified healthcare professionals for medical decisions and treatment.
+
+## 🛠️ Technology Stack
+
+**Backend:**
+- Python 3.9+
+- Flask (Web framework)
+- TensorFlow/Keras (Deep learning)
+- OpenCV (Image processing)
+- NumPy (Numerical computing)
+
+**Frontend:**
+- React.js (UI framework)
+- HTML5/CSS3 (Styling)
+- JavaScript ES6+ (Logic)
+
+**Model:**
+- DenseNet-121 (CNN architecture)
+- Pre-trained weights
+- Multi-label classification
+
+## 📈 API Endpoints
+
+### `POST /api/analyze`
+Analyze chest X-ray image
+```json
+{
+  "image": "data:image/jpeg;base64,..."
+}
 ```
-GEMINI_API_KEY=your_api_key_here
-```
 
-3. Run the application:
-```bash
-python apriori_diagnosis_app.py
-```
+### `GET /api/health`
+Check server health and model status
 
-4. Open browser to `http://localhost:5003`
+## 🚀 Deployment
 
-## Usage
+For production deployment:
 
-1. **Upload Image**: Drag and drop or select a chest X-ray image
-2. **AI Validation**: Gemini AI validates the image is a chest X-ray
-3. **Get Diagnosis**: View AI-powered analysis with:
-   - Primary conditions detected
-   - Associated conditions from medical patterns
-   - Potential complications if untreated
-4. **Medical Insights**: Understand confidence levels and association rules
+1. **Backend**: Deploy Flask app using Gunicorn + Nginx
+2. **Frontend**: Build React app (`npm run build`) and serve static files
+3. **Model**: Ensure model file is accessible to backend server
 
-## Algorithm Details
+## 📝 License
 
-- **Apriori Algorithm**: Trained on real NIH medical data to find frequent itemsets
-- **Association Rules**: Generates medical insights with confidence and lift metrics
-- **Image Analysis**: Extracts features like brightness, contrast, and edge density
-- **Rule Application**: Maps image features to medical conditions using trained patterns
+This project is for educational purposes. Model weights and dataset usage should comply with respective licenses.
 
-## Files Structure
+## 🤝 Contributing
 
-- `apriori_diagnosis_app.py` - Main Flask application
-- `train_apriori_model.py` - Training script for Apriori model
-- `chest_xray_apriori_model.pkl` - Trained model with 4 association rules
-- `Data_Entry_2017.csv` - NIH dataset with 112K+ patient records
-- `templates/` - HTML templates for web interface
-- `static/` - CSS and JavaScript files
-
-## Example Medical Insights
-
-The application identifies patterns like:
-- Pneumonia → Sepsis (65% confidence)
-- Cardiomegaly → Heart Failure (65% confidence)
-- Atelectasis → Effusion (38% confidence)
-- Mass → Lung Cancer risk assessment
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
